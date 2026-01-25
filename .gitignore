@@ -1,0 +1,68 @@
+####################################
+# OS / Editor
+####################################
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.user
+*.suo
+
+####################################
+# .NET / ASP.NET Core
+####################################
+bin/
+obj/
+out/
+TestResults/
+.vs/
+
+# User-specific files
+*.user
+*.rsuser
+
+# Secrets & configs
+appsettings.json
+appsettings.*.json
+secrets.json
+
+# EF Core
+Migrations/*.cs
+!Migrations/README.md
+
+####################################
+# Flutter / Dart
+####################################
+.buildlog
+.dart_tool/
+.packages
+.pub-cache/
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# Build outputs
+build/
+android/.gradle/
+android/local.properties
+android/key.properties
+android/app/debug/
+android/app/profile/
+android/app/release/
+
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/ephemeral/
+ios/Flutter/Generated.xcconfig
+ios/Flutter/flutter_export_environment.sh
+
+####################################
+# Firebase / Keys (if used)
+####################################
+google-services.json
+GoogleService-Info.plist
+
+####################################
+# Logs
+####################################
+*.log
