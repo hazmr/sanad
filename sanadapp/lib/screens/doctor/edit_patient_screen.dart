@@ -5,6 +5,7 @@ import '../../core/localization/app_localizations.dart';
 import '../../core/models/patient_model.dart';
 import '../../core/providers/auth_provider.dart';
 import '../../core/services/api_service.dart';
+import '../../core/widgets/app_text_field.dart';
 
 class EditPatientScreen extends StatefulWidget {
   final PatientModel patient;
@@ -21,7 +22,6 @@ class _EditPatientScreenState extends State<EditPatientScreen> {
   late TextEditingController _phoneController;
   final _passwordController = TextEditingController();
   bool _isLoading = false;
-  bool _obscurePassword = true;
   bool _changePassword = false;
 
   @override
@@ -178,12 +178,9 @@ class _EditPatientScreenState extends State<EditPatientScreen> {
               
               const SizedBox(height: 32),
               
-              TextFormField(
+              AppTextField.name(
                 controller: _nameController,
-                decoration: InputDecoration(
-                  labelText: loc.get('patientName'),
-                  prefixIcon: const Icon(Icons.person_outline),
-                ),
+                labelText: loc.get('patientName'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return loc.get('patientName');
@@ -194,14 +191,9 @@ class _EditPatientScreenState extends State<EditPatientScreen> {
               
               const SizedBox(height: 16),
               
-              TextFormField(
+              AppTextField.phone(
                 controller: _phoneController,
-                keyboardType: TextInputType.phone,
-                textDirection: TextDirection.ltr,
-                decoration: InputDecoration(
-                  labelText: loc.get('phoneNumber'),
-                  prefixIcon: const Icon(Icons.phone_outlined),
-                ),
+                labelText: loc.get('phoneNumber'),
               ).animate().slideY(begin: 0.2, duration: 400.ms, delay: 300.ms),
               
               const SizedBox(height: 16),
@@ -221,23 +213,9 @@ class _EditPatientScreenState extends State<EditPatientScreen> {
               
               if (_changePassword) ...[
                 const SizedBox(height: 16),
-                TextFormField(
+                AppTextField.password(
                   controller: _passwordController,
-                  obscureText: _obscurePassword,
-                  decoration: InputDecoration(
-                    labelText: loc.get('newPassword'),
-                    prefixIcon: const Icon(Icons.lock_outline),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _obscurePassword ? Icons.visibility_off : Icons.visibility,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _obscurePassword = !_obscurePassword;
-                        });
-                      },
-                    ),
-                  ),
+                  labelText: loc.get('newPassword'),
                   validator: (value) {
                     if (_changePassword && (value == null || value.isEmpty)) {
                       return loc.get('newPassword');

@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../core/localization/app_localizations.dart';
 import '../../core/providers/auth_provider.dart';
 import '../../core/services/api_service.dart';
+import '../../core/widgets/app_text_field.dart';
 
 class RegisterPatientScreen extends StatefulWidget {
   const RegisterPatientScreen({super.key});
@@ -18,7 +19,6 @@ class _RegisterPatientScreenState extends State<RegisterPatientScreen> {
   final _phoneController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _isLoading = false;
-  bool _obscurePassword = true;
 
   @override
   void dispose() {
@@ -91,11 +91,9 @@ class _RegisterPatientScreenState extends State<RegisterPatientScreen> {
               
               const SizedBox(height: 32),
               
-              TextFormField(
+              AppTextField.name(
                 controller: _nameController,
-                decoration: InputDecoration(
-                  labelText: loc.get('patientName'),
-                ),
+                labelText: loc.get('patientName'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return loc.get('patientName');
@@ -106,14 +104,9 @@ class _RegisterPatientScreenState extends State<RegisterPatientScreen> {
               
               const SizedBox(height: 16),
               
-              TextFormField(
+              AppTextField.phone(
                 controller: _phoneController,
-                keyboardType: TextInputType.phone,
-                textDirection: TextDirection.ltr,
-                textAlign: TextAlign.left,
-                decoration: InputDecoration(
-                  labelText: loc.get('phoneNumber'),
-                ),
+                labelText: loc.get('phoneNumber'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return loc.get('phoneNumber');
@@ -124,39 +117,17 @@ class _RegisterPatientScreenState extends State<RegisterPatientScreen> {
               
               const SizedBox(height: 16),
               
-              ListenableBuilder(
-                listenable: _passwordController,
-                builder: (context, _) {
-                  return TextFormField(
-                    controller: _passwordController,
-                    obscureText: _obscurePassword,
-                    textDirection: TextDirection.ltr,
-                    textAlign: TextAlign.left,
-                    decoration: InputDecoration(
-                      labelText: loc.get('password'),
-                      suffixIcon: _passwordController.text.isNotEmpty
-                          ? IconButton(
-                              icon: Icon(
-                                _obscurePassword ? Icons.visibility_off : Icons.visibility,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  _obscurePassword = !_obscurePassword;
-                                });
-                              },
-                            )
-                          : null,
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return loc.get('password');
-                      }
-                      if (value.length < 6) {
-                        return 'Password must be at least 6 characters';
-                      }
-                      return null;
-                    },
-                  );
+              AppTextField.password(
+                controller: _passwordController,
+                labelText: loc.get('password'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return loc.get('password');
+                  }
+                  if (value.length < 6) {
+                    return 'Password must be at least 6 characters';
+                  }
+                  return null;
                 },
               ).animate().slideY(begin: 0.2, duration: 400.ms, delay: 400.ms),
               

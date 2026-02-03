@@ -6,6 +6,7 @@ import '../../core/localization/app_localizations.dart';
 import '../../core/models/patient_model.dart';
 import '../../core/providers/auth_provider.dart';
 import '../../core/services/api_service.dart';
+import '../../core/widgets/app_text_field.dart';
 import 'patient_detail_screen.dart';
 import 'register_patient_screen.dart';
 
@@ -159,36 +160,29 @@ class _PatientsScreenState extends State<PatientsScreen> {
                     // Search Bar
                     Padding(
                       padding: const EdgeInsets.all(16),
-                      child: TextField(
+                      child: AppSimpleTextField.search(
                         controller: _searchController,
-                        decoration: InputDecoration(
-                          hintText: loc.get('searchPatients'),
-                          prefixIcon: const Icon(Icons.search),
-                          suffixIcon: _searchController.text.isNotEmpty
-                              ? IconButton(
-                                  icon: const Icon(Icons.clear),
-                                  onPressed: () {
-                                    _searchController.clear();
-                                    setState(() {
-                                      _searchResults = [];
-                                    });
-                                  },
-                                )
-                              : _isSearching
-                                  ? const Padding(
-                                      padding: EdgeInsets.all(12),
-                                      child: SizedBox(
-                                        width: 20,
-                                        height: 20,
-                                        child: CircularProgressIndicator(strokeWidth: 2),
-                                      ),
-                                    )
-                                  : null,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          filled: true,
-                        ),
+                        hintText: loc.get('searchPatients'),
+                        suffixIcon: _searchController.text.isNotEmpty
+                            ? IconButton(
+                                icon: const Icon(Icons.clear),
+                                onPressed: () {
+                                  _searchController.clear();
+                                  setState(() {
+                                    _searchResults = [];
+                                  });
+                                },
+                              )
+                            : _isSearching
+                                ? const Padding(
+                                    padding: EdgeInsets.all(12),
+                                    child: SizedBox(
+                                      width: 20,
+                                      height: 20,
+                                      child: CircularProgressIndicator(strokeWidth: 2),
+                                    ),
+                                  )
+                                : null,
                       ),
                     ),
                     // Results
@@ -209,12 +203,6 @@ class _PatientsScreenState extends State<PatientsScreen> {
                                     style: theme.textTheme.titleLarge?.copyWith(
                                       color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
                                     ),
-                                  ),
-                                  const SizedBox(height: 24),
-                                  ElevatedButton.icon(
-                                    onPressed: _navigateToRegisterPatient,
-                                    icon: const Icon(Icons.add),
-                                    label: Text(loc.get('addPatient')),
                                   ),
                                 ],
                               ),

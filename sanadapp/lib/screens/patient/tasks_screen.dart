@@ -5,6 +5,7 @@ import '../../core/localization/app_localizations.dart';
 import '../../core/models/table_model.dart';
 import '../../core/providers/auth_provider.dart';
 import '../../core/services/api_service.dart';
+import '../../core/widgets/app_text_field.dart';
 
 class TasksScreen extends StatefulWidget {
   const TasksScreen({super.key});
@@ -117,12 +118,11 @@ class _TasksScreenState extends State<TasksScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: Text(task.label),
-        content: TextField(
+        content: AppTextField.multiline(
           controller: controller,
-          maxLines: 4,
-          decoration: InputDecoration(
-            hintText: loc.get('answerPlaceholder'),
-          ),
+          hintText: loc.get('answerPlaceholder'),
+          minLines: 3,
+          maxLines: 6,
         ),
         actions: [
           TextButton(

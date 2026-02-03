@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 import '../../core/localization/app_localizations.dart';
 import '../../core/providers/auth_provider.dart';
+import '../../core/widgets/app_text_field.dart';
 import '../common/about_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -16,7 +17,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _phoneController = TextEditingController();
   final _passwordController = TextEditingController();
-  bool _obscurePassword = true;
 
   @override
   void dispose() {
@@ -108,14 +108,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 32),
                   
                   // Phone Number Field
-                  TextFormField(
+                  AppTextField.phone(
                     controller: _phoneController,
-                    keyboardType: TextInputType.phone,
-                    textDirection: TextDirection.ltr,
-                    textAlign: TextAlign.left,
-                    decoration: InputDecoration(
-                      labelText: loc.get('phoneNumber'),
-                    ),
+                    labelText: loc.get('phoneNumber'),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return loc.get('phoneNumber');
@@ -132,36 +127,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 16),
                   
                   // Password Field
-                  ListenableBuilder(
-                    listenable: _passwordController,
-                    builder: (context, _) {
-                      return TextFormField(
-                        controller: _passwordController,
-                        obscureText: _obscurePassword,
-                        textDirection: TextDirection.ltr,
-                        textAlign: TextAlign.left,
-                        decoration: InputDecoration(
-                          labelText: loc.get('password'),
-                          suffixIcon: _passwordController.text.isNotEmpty
-                              ? IconButton(
-                                  icon: Icon(
-                                    _obscurePassword
-                                        ? Icons.visibility_outlined
-                                        : Icons.visibility_off_outlined,
-                                  ),
-                                  onPressed: () {
-                                    setState(() => _obscurePassword = !_obscurePassword);
-                                  },
-                                )
-                              : null,
-                        ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return loc.get('password');
-                          }
-                          return null;
-                        },
-                      );
+                  AppTextField.password(
+                    controller: _passwordController,
+                    labelText: loc.get('password'),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return loc.get('password');
+                      }
+                      return null;
                     },
                   ).animate().slideY(
                     begin: 0.2,

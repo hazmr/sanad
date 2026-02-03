@@ -5,6 +5,7 @@ import '../../core/localization/app_localizations.dart';
 import '../../core/models/table_model.dart';
 import '../../core/providers/auth_provider.dart';
 import '../../core/services/api_service.dart';
+import '../../core/widgets/app_text_field.dart';
 
 class EditTableScreen extends StatefulWidget {
   final int patientId;
@@ -209,12 +210,11 @@ class _EditTableScreenState extends State<EditTableScreen> {
           padding: const EdgeInsets.all(16),
           children: [
             // Table Name
-            TextFormField(
+            AppTextField(
               controller: _tableNameController,
-              decoration: InputDecoration(
-                labelText: loc.get('tableName'),
-                prefixIcon: const Icon(Icons.table_chart),
-              ),
+              type: AppTextFieldType.text,
+              labelText: loc.get('tableName'),
+              prefixIcon: Icons.table_chart,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return loc.get('tableName');
@@ -256,13 +256,12 @@ class _EditTableScreenState extends State<EditTableScreen> {
                   child: Row(
                     children: [
                       Expanded(
-                        child: TextFormField(
+                        child: AppTextField(
                           controller: controller,
-                          decoration: InputDecoration(
-                            hintText: loc.get('taskLabel'),
-                            border: InputBorder.none,
-                            contentPadding: const EdgeInsets.symmetric(horizontal: 12),
-                          ),
+                          type: AppTextFieldType.text,
+                          hintText: loc.get('taskLabel'),
+                          filled: false,
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return loc.get('taskLabel');
@@ -327,13 +326,12 @@ class _EditTableScreenState extends State<EditTableScreen> {
                   child: Row(
                     children: [
                       Expanded(
-                        child: TextFormField(
+                        child: AppTextField(
                           controller: controller,
-                          decoration: InputDecoration(
-                            hintText: loc.get('taskLabel'),
-                            border: InputBorder.none,
-                            contentPadding: const EdgeInsets.symmetric(horizontal: 12),
-                          ),
+                          type: AppTextFieldType.text,
+                          hintText: loc.get('taskLabel'),
+                          filled: false,
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return loc.get('taskLabel');
