@@ -167,7 +167,7 @@ class SettingsScreen extends StatelessWidget {
             child: ListTile(
               leading: const Icon(Icons.info_outline),
               title: Text(loc.get('aboutApp')),
-              subtitle: Text('${loc.get('version')}: 1.0.1'),
+              subtitle: Text('${loc.get('version')}: 1.0.2'),
               trailing: const Icon(Icons.chevron_right),
               onTap: () {
                 Navigator.push(
